@@ -12,7 +12,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://dreamer:dreamstorchlight@161.97.127.198:3306/dream-db"
+  url      = env("DATABASE_URL")
 }
 
 model User {

@@ -1,0 +1,296 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// relationMode = "prisma"
+
+generator client {
+  provider      = "prisma-client-js"
+  //binaryTargets = ["native", "debian-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:dreamstorchlight@161.97.127.198:9000/dream-db"
+}
+
+model User {
+  id  Int @id @default(autoincrement())
+  email String  @unique
+  username  String? @unique
+  password  String?
+  gender  String?
+  dob DateTime?
+  country Json?
+  picture String? @default("/assets/pic_placeholder.jpg")
+  googleAuth  Boolean? @default(false)
+  oldUser Boolean @default(false)
+  admin Boolean @default(false)
+  about String? @db.Text
+  whatsapp String?
+  suspended DateTime?
+  banned  Boolean? @default(false)
+  warnings Int? @default(0)
+  warn_text String? @db.Text
+  preferences Json?
+  secret Json?
+  moderating  ForumModerators[]
+  welcomed Boolean @default(false)
+  lastLoggedIn  Int?
+  lastActivity  Int?
+  timeSpentOnline Int?
+  views Views[]
+  threads Thread[] 
+  posts Post[] 
+  reactions Reaction[] 
+  followedForums  ForumFollowers[] 
+  followers UserFollowers[]
+  bookmarks Bookmark[] 
+  reports Reports[]
+  messagesSent  Chat[] @relation("Sender")
+  messagesReceived  Chat[] @relation("Receiver")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model Category {
+  id  Int @id @default(autoincrement())
+  name  String  @unique
+  slug  String  @default("_")
+  description String  @unique
+  position  Int
+  forums  Forum[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model Forum {
+  id  Int @id @default(autoincrement())
+  name  String  @unique
+  slug  String  @default("__")
+  description String @unique
+  position  Int
+  category  Category  @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  moderators  ForumModerators[]
+  threads Thread[]
+  posts Post[]
+  locked  Boolean @default(false)
+  forumAnnouncement ForumAnnouncement[]
+  followers ForumFollowers[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model Thread {
+  id  Int @id @default(autoincrement())
+  title String
+  slug  String
+  content_html String @db.Text
+  content_text String @db.Text
+  pinned  Boolean @default(false)
+  locked  Boolean @default(false)
+  hidden  Boolean @default(false)
+  posts Post[]
+  reactions Reaction[]
+  views Views[]
+  images  ContentImages[]
+  docs  ContentDocs[]
+  bookmarks Bookmark[]
+  reports Reports[]
+  forumId Int
+  forum  Forum  @relation(fields: [forumId], references: [id])
+  userId Int
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model Post {
+  id  Int @id @default(autoincrement())
+  content_html  String  @db.Text
+  content_text  String  @db.Text
+  quote Json?
+  pinned  Boolean @default(false)
+  locked  Boolean @default(false)
+  hidden  Boolean @default(false)
+  reactions Reaction[]
+  views Views[]
+  images  ContentImages[]
+  docs  ContentDocs[]
+  bookmarks Bookmark[]
+  reports Reports[]
+  threadId Int
+  thread  Thread  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  forumId Int
+  forum  Forum  @relation(fields: [forumId], references: [id])
+  userId Int
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model Reaction {
+  id  Int @id @default(autoincrement())
+  emoji String
+  threadId Int?
+  thread  Thread?  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  postId Int?
+  post  Post?  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId Int
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model Views {
+  id  Int @id @default(autoincrement())
+  identifier  String
+  threadId Int?
+  thread  Thread?  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  postId Int?
+  post  Post?  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId Int
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+  @@unique([identifier, postId])
+  @@unique([identifier, threadId])
+}
+
+model Bookmark {
+  id  Int @id @default(autoincrement())
+  type  String
+  threadId Int?
+  thread  Thread?  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  postId Int?
+  post  Post?  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId Int
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model ContentImages {
+  id  Int @id @default(autoincrement())
+  url String
+  threadId Int?
+  thread  Thread?  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  postId Int?
+  post  Post?  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model ContentDocs {
+  id  Int @id @default(autoincrement())
+  url String
+  threadId Int?
+  thread  Thread?  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  postId Int?
+  post  Post?  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model ForumAnnouncement {
+  id  Int @id @default(autoincrement())
+  content String  @db.Text
+  audio String?
+  expire  DateTime?
+  hide  Boolean @default(true)
+  hideAudio Boolean @default(false)
+  forumId Int
+  forum  Forum  @relation(fields: [forumId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model ForumModerators {
+  id  Int @id @default(autoincrement())
+  userId Int
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  forumId Int
+  forum  Forum  @relation(fields: [forumId], references: [id], onDelete: Cascade)
+  permisions  Json?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model ForumMeta {
+  id  Int @id @default(autoincrement())
+  announcement String?  @db.Text
+  hide  Boolean @default(true)
+  time  Int?
+  welcome String? @db.Text
+  auth  Boolean @default(false)
+}
+
+model Reports {
+  id  Int @id @default(autoincrement())
+  type  String
+  message String? @db.Text
+  reporter  String
+  link  String
+  threadId Int?
+  thread  Thread?  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  postId Int?
+  post  Post?  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId Int?
+  user  User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model Visitors {
+  id  Int @id @default(autoincrement())
+  fingerprint  String @unique
+  lastVisit DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model Chat {
+  id  Int @id @default(autoincrement())
+  slug  String @unique
+  favourite Boolean?  @default(false)
+  lastUpdated DateTime?
+  lastUser  Int?
+  sender  User  @relation("Sender", fields: [senderId], references: [id])
+  senderId  Int
+  receiver  User @relation("Receiver", fields: [receiverId], references: [id])
+  receiverId Int
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model Message {
+  id  Int @id @default(autoincrement())
+  message String  @db.Text
+  read  Boolean? @default(false)
+  userId  Int
+  chatId Int
+  chat  Chat  @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model ForumFollowers {
+  id  Int @id @default(autoincrement())
+  userId  Int
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  forumId Int
+  forum  Forum  @relation(fields: [forumId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}
+
+model UserFollowers {
+  id  Int @id @default(autoincrement())
+  userId  Int
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt  @default(now())
+}

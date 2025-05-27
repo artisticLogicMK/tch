@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, #_nuxt {
+  height: 100%;
+  width: 100%;
+}
+
+#__nuxt {
+  height: 100%;
+}
+
+body {
+  font-family: "Poppins", serif;
+  @apply bg-[#fafcfd] dark:bg-slate-950/[.97]
+}
+
+.font-round {
+  font-family: "Dosis", serif;
+}
+
+*{-webkit-tap-highlight-color: rgba(0,0,0,0);outline:none;transitionu: all 0.1s ease-in-out;scroll-behavior: smooth;}
+
+ body.mobile *::-webkit-scrollbar {@apply w-[1.5px] h-[2px]}
+*::-webkit-scrollbar{@apply bg-transparent w-1 sm:w-1.5 h-1}
+*::-webkit-scrollbar-thumb{@apply bg-black/10 dark:bg-slate-800}
+
+/* apply mozila specific style to scrollbar */ 
+ @-moz-document url-prefix() { 
+  body * {scrollbar-width: thin;scrollbar-color:rgba(255,255,255,.2) transparent;}}
+
+*:focus {outline: 0 !important;box-shadow:none !important;}
+
+.cp { cursor: pointer }
+
+@layer utilities {
+  /* Backgrounds global styles */
+  .bg-surface {
+    @apply bg-[#fafcfd] dark:bg-slate-950/[.97]
+  }
+  .bg-flat {
+    @apply bg-white dark:bg-slate-950
+  }
+  .bg-pri-300 {
+    @apply bg-sky-300
+  }
+  .bg-pri-400 {
+    @apply bg-sky-400
+  }
+  .bg-pri-500 {
+    @apply bg-sky-500
+  }
+  .bg-pri-600 {
+    @apply bg-sky-600
+  }
+
+  .text-bsm {
+    font-size: 0.8125rem;
+    line-height: 1.2rem;
+    /*text-[0.8125rem]*/
+  }
+  
+  /* Texts global styles */
+  .text-flat {
+    @apply text-white
+  }
+  .text-300 {
+    @apply text-slate-300
+  }
+  .text-400 {
+    @apply text-slate-400 dark:text-slate-400
+  }
+  .text-500 {
+    @apply text-slate-500 dark:text-slate-400
+  }
+  .text-600 {
+    @apply text-slate-600 dark:text-slate-300
+  }
+  
+  .text-pri-300 {
+    @apply text-sky-300
+  }
+  .text-pri-400 {
+    @apply text-sky-400
+  }
+  .text-pri-500 {
+    @apply text-sky-500
+  }
+  .text-pri-600 {
+    @apply text-sky-600 dark:text-sky-500
+  }
+  
+  /* Misc global styles */
+  .bdr {
+    @apply border-slate-200/80 dark:border-slate-900
+  }
+  
+  .custom-btn {
+    @apply flex items-center font-semibold px-3 py-1 rounded-md
+  }
+}
+
+.center {
+  @apply flex items-center justify-center
+}
+
+.side-columns {
+  @apply shrink-0 flex flex-col md3:w-[25%] h-fit md3:h-full text-600 p-3
+}
+
+
+.userheads {
+  @apply font-round text-base xs:text-lg font-semibold text-slate-500 dark:text-slate-400
+}
+
+.forums-list-head {
+  @apply flex items-center font-semibold font-round
+}
+.forums-list-head svg {
+  @apply mr-1
+}
+
+form .label {
+  @apply text-bsm xs:text-sm font-semibold text-600 mb-2
+}
+
+form .input, form textarea.input, .input {
+  @apply flex w-full rounded-md border bdr bg-transparent px-3 h-9 text-bsm xs:text-sm text-600 file:border-0 file:bg-transparent file:text-600 file:text-sm file:font-medium placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-sky-400 dark:focus-visible:ring-sky-400/50 disabled:cursor-not-allowed disabled:opacity-50 dark:placeholder:text-slate-400/70
+}
+form .input[type="file"] {
+  @apply h-auto py-1.5
+}
+form textarea {
+  @apply py-2
+}
+form select option {
+  @apply dark:text-slate-300 dark:bg-slate-950
+}
+form select optgroup {
+  @apply dark:bg-slate-900
+}
+form textarea.input {
+  @apply h-auto
+}
+
+form .form-errs {
+  @apply text-red-500 text-bsm xs:text-sm mb-1
+}
+
+.post-thread-card {
+  @apply bdr p-3 sm:p-4 pb-2.5
+}
+
+.thread-acts {
+  @apply flex flex-wrap items-center text-slate-600/80 dark:text-slate-300/90
+}
+.thread-acts span, .thread-acts div {
+  @apply flex items-center text-bsm xs:text-sm mr-4 mb-2.5 sm:mb-0
+}
+.thread-acts span.cp {
+  @apply active:scale-125 duration-200
+}
+.thread-acts span.sel svg {
+  @apply text-pri-500
+}
+.thread-acts svg {
+  @apply text-xl mr-1 -mt-[2px] text-slate-500/65 dark:text-slate-500
+}
+.thread-acts  svg.react {
+  @apply mr-0
+}
+.post-time span {
+  @apply text-bsm xs:text-sm text-500
+}
+
+.flag {
+  @apply ml-1.5 h-[0.80rem] -mt-[2px] inline-block
+}
+.flag.sm {
+  @apply h-[0.7rem]
+}
+
+.cards-location {
+  @apply text-[0.69rem] xs:text-xs text-slate-500/90 mb-1
+}
+
+.no-item {
+  @apply h-64 flex items-center justify-center p-4 text-slate-400/65 dark:text-slate-600 text-2xl font-semibold
+}

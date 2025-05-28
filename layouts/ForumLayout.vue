@@ -16,9 +16,7 @@ global.fetchData()
 
 if (process.client) responsive.value = true
 
-const config = useRuntimeConfig()
-
-const token = import.meta.env.VITE_IPINFO_TOKEN || config.public.ipinfoToken
+const token = import.meta.env.VITE_IPINFO_TOKEN || "0efcfe40be5649"
 
 onMounted(async () => {
   if (!process.client) return

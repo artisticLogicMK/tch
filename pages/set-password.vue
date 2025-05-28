@@ -100,12 +100,20 @@ const submitPass = async () => {
     })
   }
 }
+
+const logout = () => {
+  auth.logout()
+  navigateTo('/')
+}
 </script>
 
 <template>
     <form @submit.prevent="submitPass">
 
-      <h1 class="text-lg xs:text-xl font-semibold text-sky-500">Set a Password!</h1>
+      <div class="flex items-end justify-between">
+        <h1 class="text-lg xs:text-xl font-semibold text-sky-500">Set a Password!</h1>
+        <button @click="logout" class="text-xs text-[#01153e] font-semibold">Log Out</button>
+      </div>
       <p class="text-bsm xs:text-sm text-slate-500 dark:text-slate-400 mb-5">Setup a new password to continue on the forum.</p>
       
       <div class="mb-4">

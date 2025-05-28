@@ -90,7 +90,7 @@ const submitLogin = async (googleData) => {
       auth.setUserState(data.value.user)
       
       form.value.loading = false // Stop loading
-      form.value = {email: '',password: ''}
+      form.value = {email: '',password: '', remember: true}
       
       toast({ title: 'Login Successful!' })
       

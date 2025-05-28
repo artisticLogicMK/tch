@@ -127,7 +127,7 @@ const submitProfile = async () => {
       <p class="text-bsm xs:text-sm text-slate-500 dark:text-slate-400 mb-5">The fields marked with (<span class="text-red-500">*</span>) are required.</p>
       
       
-      <div v-if="!auth.user.username" class="mb-5">
+      <div v-if="auth.user.oldUser || !auth.user.username" class="mb-5">
         <p class="label">
           Username <span class="text-red-500">*</span>
         </p>

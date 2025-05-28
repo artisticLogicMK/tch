@@ -110,7 +110,7 @@ const logout = () => {
 <template>
     <form @submit.prevent="submitPass">
 
-      <div class="flex items-end justify-between">
+      <div class="flex items-center justify-between">
         <h1 class="text-lg xs:text-xl font-semibold text-sky-500">Set a Password!</h1>
         <button @click="logout" class="text-xs text-[#01153e] font-semibold">Log Out</button>
       </div>

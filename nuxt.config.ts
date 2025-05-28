@@ -62,9 +62,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       ipinfoToken: process.env.VITE_IPINFO_TOKEN,
-      googlecid: VITE_GOOGLE_CID,
-      cryptokey: VITE_CRYPTO_KEY,
-      tauktoken: VITE_TAUK_TOKEN
+      googlecid: process.env.VITE_GOOGLE_CID,
+      cryptokey: process.env.VITE_CRYPTO_KEY,
+      tauktoken: process.env.VITE_TAUK_TOKEN
     }
   },
   

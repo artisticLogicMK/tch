@@ -66,7 +66,7 @@ export default defineNuxtConfig({
       cryptokey: VITE_CRYPTO_KEY,
       tauktoken: VITE_TAUK_TOKEN
     }
-  }
+  },
   
   vite: {
     resolve: {

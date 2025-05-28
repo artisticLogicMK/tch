@@ -94,7 +94,7 @@ const submitPass = async () => {
   <form id="password" @submit.prevent="submitPass" class="mt-10 p-4 xsm:p-6 w-full max-w-lg">
 
     <h1 class="font-round text-base xs:text-xl font-bold text-sky-500 mb-2">Change Password</h1>
-    <p v-if="auth.user.googleAuth" class="text-bsm xs:text-sm text-slate-500 dark:text-slate-400 mb-5">
+    <p v-if="auth.user.googleAuth && !auth.user.password" class="text-bsm xs:text-sm text-slate-500 dark:text-slate-400 mb-5">
       <NuxtLink to="/set-password" class="text-pri-600">Set up a password here </NuxtLink>
       for Google authenticated members.
     </p>

@@ -22,7 +22,9 @@ import { Input } from '@/components/ui/input'
 import Checkbox from '@/components/ui/checkbox/Checkbox.vue'
 import Button from '@/components/ui/button/Button.vue'
 
-const token = import.meta.env.VITE_IPINFO_TOKEN
+const config = useRuntimeConfig()
+
+const token = import.meta.env.VITE_IPINFO_TOKEN || config.public.ipinfoToken
 
 // Fetch user country for a great user experience
 const { data } = await useAsyncData('fetch-country', () => $fetch(`https://ipinfo.io?token=${token}`))
@@ -125,7 +127,7 @@ const submitProfile = async () => {
       <p class="text-bsm xs:text-sm text-slate-500 dark:text-slate-400 mb-5">The fields marked with (<span class="text-red-500">*</span>) are required.</p>
       
       
-      <div class="mb-5">
+      <div v-if="!auth.user.username" class="mb-5">
         <p class="label">
           Username <span class="text-red-500">*</span>
         </p>

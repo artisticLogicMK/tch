@@ -59,6 +59,15 @@ export default defineNuxtConfig({
     head: headConfig
   },
   
+  runtimeConfig: {
+    public: {
+      ipinfoToken: process.env.VITE_IPINFO_TOKEN,
+      googlecid: VITE_GOOGLE_CID,
+      cryptokey: VITE_CRYPTO_KEY,
+      tauktoken: VITE_TAUK_TOKEN
+    }
+  }
+  
   vite: {
     resolve: {
        alias: {

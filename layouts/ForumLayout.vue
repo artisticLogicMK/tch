@@ -16,8 +16,6 @@ global.fetchData()
 
 if (process.client) responsive.value = true
 
-const config = useRuntimeConfig()
-
 const token = import.meta.env.VITE_IPINFO_TOKEN || "0efcfe40be5649"
 
 onMounted(async () => {
@@ -36,7 +34,7 @@ onMounted(async () => {
 
 <template>
   <div class="flex flex-col w-full h-screen">
-    {{config.public.ipinfoToken}}
+
     <Header />
   
     <main class="grow md3:flex flex-col-reverse md3:flex-row w-full max-w-[1440px] mx-auto overflow-y-auto md3:overflow-y-hidden">

@@ -3,7 +3,7 @@ var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;
-const token = import.meta.env.VITE_TAUK_TOKEN
+const token = import.meta.env.VITE_TAUK_TOKEN || "67ff1c8c2f1c13191005dea9"
 s1.src=`https://embed.tawk.to/${token}/1iou8f1gm`;
 s1.charset='UTF-8';
 s1.setAttribute('crossorigin','*');

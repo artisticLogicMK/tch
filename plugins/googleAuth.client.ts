@@ -22,7 +22,7 @@ export default defineNuxtPlugin(() => {
         loadGoogleScript().then(() => {
           if (window.google && element && handlerName) {
             const isDarkMode = document.documentElement.classList.contains("dark")
-            const cid = import.meta.env.VITE_GOOGLE_CID
+            const cid = import.meta.env.VITE_GOOGLE_CID || "696072540974-nemflmo22milcqe35i3k3bfdi6c9egkk.apps.googleusercontent.com"
             
             window.google.accounts.id.initialize({
               client_id: cid,

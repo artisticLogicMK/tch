@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js'
 
 const SECRET_KEY = process.server
   ? process.env.VITE_CRYPTO_KEY
-  : import.meta.env.VITE_CRYPTO_KEY
+  : import.meta.env.VITE_CRYPTO_KEY || "626300_torchlight_artisticlogic0123"
   
  // Encryption 
  export function encrypt(text) { 

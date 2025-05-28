@@ -11,8 +11,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = "mysql://root:dreamstorchlight@cmauih8yz000uqlao4n54sv5i:3306/dream-db"
 }
 
 model User {

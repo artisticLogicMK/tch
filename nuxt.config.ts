@@ -3,7 +3,7 @@ import { headConfig } from "./utils/headConfig"
 import { join } from 'path'
 
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   server: {
     host: '0.0.0.0',
     port: 3001

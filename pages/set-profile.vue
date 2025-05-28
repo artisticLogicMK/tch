@@ -22,9 +22,7 @@ import { Input } from '@/components/ui/input'
 import Checkbox from '@/components/ui/checkbox/Checkbox.vue'
 import Button from '@/components/ui/button/Button.vue'
 
-const config = useRuntimeConfig()
-
-const token = import.meta.env.VITE_IPINFO_TOKEN || config.public.ipinfoToken
+const token = import.meta.env.VITE_IPINFO_TOKEN || "0efcfe40be5649"
 
 // Fetch user country for a great user experience
 const { data } = await useAsyncData('fetch-country', () => $fetch(`https://ipinfo.io?token=${token}`))

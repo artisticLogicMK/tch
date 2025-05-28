@@ -12,7 +12,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:dreamstorchlight@cmauih8yz000uqlao4n54sv5i:3306/dream-db"
+  url      = "mysql://dreamer:dreamstorchlight@cmauih8yz000uqlao4n54sv5i:3306/dream-db"
 }
 
 model User {
